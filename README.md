@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173/imputex-site/ (Vite uses the same base path as production).
+Open http://localhost:5173/ (with `base: "/"` for custom domain).
 
 ## Build
 
@@ -21,32 +21,23 @@ Output is in `dist/`.
 
 ## Deploy to GitHub Pages
 
-1. Create a new repository on GitHub (e.g. `imputex-site`). Do not add a README or .gitignore there if you are pushing this project.
+The site is **hosted on GitHub**. A GitHub Action builds and deploys it whenever you push to `main`, so you do not need to run anything locally to deploy.
 
-2. Set the remote and push:
+1. Push your code (remote should already point at your repo):
 
    ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/imputex-site.git
-   git branch -M main
    git push -u origin main
    ```
 
-3. Update `package.json` and `vite.config.js` if your repo name or GitHub username differ:
-   - `package.json`: set `"homepage": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/"`
-   - `vite.config.js`: set `base: "/YOUR_REPO_NAME/"`
-
-4. Deploy the built site to the `gh-pages` branch:
-
-   ```bash
-   npm run deploy
-   ```
-
-5. On GitHub: **Settings → Pages**. Under "Build and deployment", set:
-   - Source: **Deploy from a branch**
-   - Branch: **gh-pages** / **/ (root)**
+2. On GitHub: **Settings → Pages**. Under "Build and deployment":
+   - Source: **GitHub Actions** (not "Deploy from a branch").
    - Save.
 
-The site will be available at `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`.
+3. After the first push, the "Deploy to GitHub Pages" workflow runs automatically. Check the **Actions** tab for status. When it finishes, the site is live (at your custom domain if configured, or at the default GitHub Pages URL).
+
+You only need to **push to `main`**; GitHub builds and deploys on its servers.
+
+**Optional – deploy from your machine:** If you prefer to build and push the site yourself, run `npm run deploy`. That pushes the built files to the `gh-pages` branch. For that to work, Pages must be set to **Deploy from a branch** with branch **gh-pages**. The workflow above uses the newer **GitHub Actions** source instead, so use one or the other.
 
 ## Custom domain (e.g. GoDaddy)
 
